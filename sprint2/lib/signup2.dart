@@ -60,7 +60,17 @@ class _PdfUploaderHomePageState extends State<PdfUploaderHomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          ElevatedButton(
+                          Container(
+                            child: const Text(
+                              "Attach medical record",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          OutlinedButton(
                             onPressed: () async {
                               FilePickerResult? result =
                                   await FilePicker.platform.pickFiles(
@@ -74,7 +84,22 @@ class _PdfUploaderHomePageState extends State<PdfUploaderHomePage> {
                                 });
                               }
                             },
-                            child: Text('Select PDF'),
+                            style: OutlinedButton.styleFrom(
+                              primary:
+                                  Colors.white, // Set the border color to white
+                              side: BorderSide(
+                                  width: 1,
+                                  color: Colors
+                                      .white), // Set the border width and color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            child: Text(
+                              'Select PDF',
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
                           ),
                           SizedBox(height: 16),
                           if (_selectedFile != null)
