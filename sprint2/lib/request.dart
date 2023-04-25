@@ -81,10 +81,18 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
         child: Form(
           key: _formKey,
           child: Column(children: [
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: _dateController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Date'),
+              decoration: InputDecoration(
+                labelText: 'Date',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a date';
@@ -92,10 +100,18 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                 return null;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: _timeController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Time'),
+              decoration: InputDecoration(
+                labelText: 'Time',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a time';
@@ -103,10 +119,18 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                 return null;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
               controller: _doctorSpecialityController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Doctor Speciality'),
+              decoration: InputDecoration(
+                labelText: 'Doctor Speciality',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a doctor speciality';
@@ -114,16 +138,65 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                 return null;
               },
             ),
+            SizedBox(
+              height: 20,
+            ),
             TextFormField(
-              controller: _doctorSpecialityController,
+              controller: _locationController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(labelText: 'Doctor Speciality'),
+              decoration: InputDecoration(
+                labelText: 'Location',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter a doctor speciality';
+                  return 'Please enter a location';
                 }
                 return null;
               },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              controller: _patientNameController,
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                labelText: 'Patient Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter the patient name';
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: _submitForm,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 16, vertical: 12), // Adjust padding
+                child: Text(
+                  'Submit',
+                  style: TextStyle(fontSize: 20), // Adjust font size
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.transparent,
+                onPrimary: Colors.white,
+                side: BorderSide(width: 1, color: Colors.white),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
           ]),
         ),
