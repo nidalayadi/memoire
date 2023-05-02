@@ -1,4 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'functions.dart' as func;
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -6,12 +10,40 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Map<String, dynamic>? obj;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  Future<void> _getData() async {
+    final response = await func.makeGetRequest();
+    final responseData = json.decode(response);
+    setState(() {
+      obj = responseData['patient'];
+    });
+  }
+
+  String calcAge(String dateOfBirth) {
+    DateTime birthDateUtc = DateTime.parse(dateOfBirth);
+    DateTime nowUtc = DateTime.now().toUtc();
+
+    Duration difference = nowUtc.difference(birthDateUtc);
+
+    int age = (difference.inDays / 365).floor();
+
+    print('Age: $age'); // Output: Age: 33
+    return age.toString();
+  }
+
   String _name = 'John Doe';
   String _age = '25';
   String _gender = 'Male';
   String _address = '1234 Main St, Springfield';
-  String _photoUrl =
-      'https://example.com/profile_photo.png'; // Replace with actual photo URL
+  late final String _photoUrl =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2OWYfnqgJ46PqJmkiw9s5mRyWvNm7WhvN524ApoIcALqy8aoi20JaW05I6i4ly2rVPnY&usqp=CAU'; // Replace with actual photo URL
 
   // Edit profile information
   void _editProfile() async {
@@ -63,12 +95,15 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           actions: [
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                var boom = await func.makeGetRequest();
+                Map<String, dynamic> obj = jsonDecode(boom);
+                print(obj["patient"]['firstName']);
                 Navigator.of(context).pop({
-                  'name': _name,
-                  'age': _age,
-                  'gender': _gender,
-                  'address': _address,
+                  'name': obj["patient"]['firstName'],
+                  'age': obj["patient"]['dateOfBirth'],
+                  'gender': obj["patient"]['gender'],
+                  'address': obj["patient"]['address'],
                 });
               },
               child: Text('Save'),
@@ -110,13 +145,14 @@ class _ProfilePageState extends State<ProfilePage> {
               radius: 80,
             ),
             SizedBox(height: 20),
-            Text('Name: $_name', style: TextStyle(fontSize: 24)),
+            Text('Name: ${obj!["firstName"]}', style: TextStyle(fontSize: 24)),
             SizedBox(height: 10),
-            Text('Age: $_age', style: TextStyle(fontSize: 18)),
+            Text('Age: ${calcAge(obj!['dateOfBirth'])}',
+                style: TextStyle(fontSize: 18)),
             SizedBox(height: 10),
-            Text('Gender: $_gender', style: TextStyle(fontSize: 18)),
+            Text('Gender: ${obj!["gender"]}', style: TextStyle(fontSize: 18)),
             SizedBox(height: 10),
-            Text('Address: $_address', style: TextStyle(fontSize: 18)),
+            Text('Address: ${obj!["address"]}', style: TextStyle(fontSize: 18)),
           ],
         ),
       ),
