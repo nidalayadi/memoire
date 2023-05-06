@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'functions.dart';
 
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
@@ -8,16 +12,18 @@ class MyRegister extends StatefulWidget {
 }
 
 class _MyRegisterState extends State<MyRegister> {
-  TextEditingController _firstNameController = TextEditingController();
-  TextEditingController _lastNameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
     _firstNameController.dispose();
     _lastNameController.dispose();
     _emailController.dispose();
+    _phoneNumberController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -111,7 +117,7 @@ class _MyRegisterState extends State<MyRegister> {
                   height: 30,
                 ),
                 TextField(
-                  controller: _emailController,
+                  controller: _phoneNumberController,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -163,7 +169,20 @@ class _MyRegisterState extends State<MyRegister> {
                         backgroundColor: const Color(0xff4c505b),
                         child: IconButton(
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () async {
+                            var result = await register(
+                                _firstNameController.text,
+                                _lastNameController.text,
+                                _emailController.text,
+                                _phoneNumberController.text,
+                                _passwordController.text);
+                            if (result) {
+                              // ignore: use_build_context_synchronously
+                              Navigator.pushNamed(context, 'login');
+                            } else {
+                              _emailController.text = "who the hell are you ";
+                            }
+                          },
                           icon: const Icon(Icons.arrow_forward),
                         ),
                       ),
@@ -191,5 +210,38 @@ class _MyRegisterState extends State<MyRegister> {
         ]),
       ),
     );
+  }
+}
+
+Future<bool> register(String firstName, String lastName, String email,
+    String phone, String password) async {
+  final url = Uri.parse(
+      '${dotenv.env['ROOT_ENDPOINT']}/patient/register'); // replace with your register URL
+  final response = await http.post(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(<String, String>{
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'phoneNumber': phone,
+      'password': password,
+      'dateOfBirth': "2002-07-26",
+      'gender': "male",
+      'address': "1600",
+      'medicalHistory': "never been sick",
+      'insuranceInformation': "too broke for that"
+    }),
+  );
+  print("this is the response we got" + response.body);
+  if (response.statusCode == 201) {
+    await saveToken(jsonDecode(response.body)["user"]['token']);
+    return true;
+  } else if (response.statusCode == 400) {
+    return false;
+  } else {
+    throw Exception('Failed to register user');
   }
 }

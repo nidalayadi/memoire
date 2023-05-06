@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
@@ -6,12 +5,15 @@ import 'demand.dart';
 import 'login.dart';
 import 'navigation.dart';
 import 'signup.dart';
+import 'profile.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'navigation',
+        initialRoute: 'login',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
@@ -19,6 +21,7 @@ void main() {
           'demand': (context) => Tasks(),
           'request': (context) => HomeCareRequestForm(),
           'navigation': (context) => firstPage(),
+          'profile': (context) => ProfilePage(),
         }),
   );
 }

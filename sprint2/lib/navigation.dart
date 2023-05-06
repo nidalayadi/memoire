@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:sprint2/profile.dart';
-
 import 'demand.dart';
+import 'functions.dart' as func;
 
 class firstPage extends StatefulWidget {
   @override
   State<firstPage> createState() => _firstPageState();
 }
+
+Map<String, dynamic>? obj;
 
 class _firstPageState extends State<firstPage> {
   int _currentIndex = 0;
@@ -21,6 +25,15 @@ class _firstPageState extends State<firstPage> {
   void initState() {
     super.initState();
     pages[2] = ProfilePage();
+    _getData();
+  }
+
+  Future<void> _getData() async {
+    final response = await func.makeGetRequest();
+    final responseData = json.decode(response);
+    setState(() {
+      obj = responseData['patient'];
+    });
   }
 
   @override
@@ -116,10 +129,10 @@ class _MyWidgetState extends State<MyWidget> {
                       height: 10,
                     ),
                     Text(
-                      "Dr. Mouhmed Djakour",
+                      "Dr.${obj!['lastName']} ${obj!["firstName"]}",
                       style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
-                    Text("psychologe", style: TextStyle(color: Colors.white)),
+                    Text("Patient", style: TextStyle(color: Colors.white)),
                     SizedBox(
                       height: 10,
                     ),
@@ -142,7 +155,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Container(
                 child: Row(
@@ -170,7 +183,7 @@ class _MyWidgetState extends State<MyWidget> {
                                   TextStyle(fontSize: 20, color: Colors.white)),
                           SizedBox(height: 10),
                           Container(
-                            height: 220,
+                            height: 210,
                             width: 150,
                             child: Expanded(
                               child: ListView.builder(
@@ -275,6 +288,7 @@ class _MyWidgetState extends State<MyWidget> {
                                 OutlinedButton(
                                   onPressed: () {},
                                   style: OutlinedButton.styleFrom(
+                                    // ignore: deprecated_member_use
                                     primary: Colors
                                         .white, // Set the border color to white
                                     side: BorderSide(
