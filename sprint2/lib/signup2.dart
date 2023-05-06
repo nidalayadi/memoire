@@ -1,7 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
+//import 'package:file_picker/file_picker.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
+
+import 'functions.dart';
 
 class PdfUploaderApp extends StatelessWidget {
   @override
@@ -58,6 +61,7 @@ class _PdfUploaderHomePageState extends State<PdfUploaderHomePage> {
                   children: [
                     Center(
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
@@ -72,17 +76,19 @@ class _PdfUploaderHomePageState extends State<PdfUploaderHomePage> {
                           ),
                           OutlinedButton(
                             onPressed: () async {
-                              FilePickerResult? result =
-                                  await FilePicker.platform.pickFiles(
-                                type: FileType.custom,
-                                allowedExtensions: ['pdf'],
+                              //With parameters:
+                              FlutterDocumentPickerParams params =
+                                  FlutterDocumentPickerParams(
+                                allowedFileExtensions: ['pdf'],
                               );
-                              if (result != null) {
-                                setState(() {
-                                  _selectedFile =
-                                      File(result.files.single.path!);
-                                });
-                              }
+                              final path =
+                                  await FlutterDocumentPicker.openDocument(
+                                      params: params);
+                              print(path);
+                              sendPdf(path);
+                              File file = File(path!);
+                              print(file);
+                              //here i am suposed to send it to my database
                             },
                             style: OutlinedButton.styleFrom(
                               primary:

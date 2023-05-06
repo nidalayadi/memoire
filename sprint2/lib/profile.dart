@@ -38,10 +38,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return age.toString();
   }
 
-  String _name = 'John Doe';
-  String _age = '25';
-  String _gender = 'Male';
-  String _address = '1234 Main St, Springfield';
+  String _name = "";
+  String _age = "";
+  String _gender = "";
+  String _address = "";
   late final String _photoUrl =
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2OWYfnqgJ46PqJmkiw9s5mRyWvNm7WhvN524ApoIcALqy8aoi20JaW05I6i4ly2rVPnY&usqp=CAU'; // Replace with actual photo URL
 
@@ -96,15 +96,18 @@ class _ProfilePageState extends State<ProfilePage> {
           actions: [
             ElevatedButton(
               onPressed: () async {
-                var boom = await func.makeGetRequest();
-                Map<String, dynamic> obj = jsonDecode(boom);
-                print(obj["patient"]['firstName']);
-                Navigator.of(context).pop({
-                  'name': obj["patient"]['firstName'],
-                  'age': obj["patient"]['dateOfBirth'],
-                  'gender': obj["patient"]['gender'],
-                  'address': obj["patient"]['address'],
-                });
+                var changes = {};
+                print("name " + _name);
+                if (_name != "") {}
+                // var boom = await func.updateProfile(changes);
+                // Map<String, dynamic> obj = jsonDecode(boom);
+                // print(obj["patient"]['firstName']);
+                // Navigator.of(context).pop({
+                //   'name': obj["patient"]['firstName'],
+                //   'age': obj["patient"]['dateOfBirth'],
+                //   'gender': obj["patient"]['gender'],
+                //   'address': obj["patient"]['address'],
+                // });
               },
               child: Text('Save'),
             ),
@@ -114,12 +117,27 @@ class _ProfilePageState extends State<ProfilePage> {
     );
 
     // Handle updated profile data
+    // Handle updated profile data
     if (updatedProfile != null) {
       setState(() {
         _name = updatedProfile['name'];
         _age = updatedProfile['age'];
         _gender = updatedProfile['gender'];
         _address = updatedProfile['address'];
+
+        // Update the obj map with new values
+        if (_name.isNotEmpty) {
+          obj!['firstName'] = _name;
+        }
+        if (_age.isNotEmpty) {
+          obj!['dateOfBirth'] = _age;
+        }
+        if (_gender.isNotEmpty) {
+          obj!['gender'] = _gender;
+        }
+        if (_address.isNotEmpty) {
+          obj!['address'] = _address;
+        }
       });
     }
   }
