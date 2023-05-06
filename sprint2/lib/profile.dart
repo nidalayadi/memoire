@@ -101,22 +101,40 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
       ),
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CircleAvatar(
               backgroundImage: NetworkImage(_photoUrl),
               radius: 80,
             ),
             SizedBox(height: 20),
-            Text('Name: $_name', style: TextStyle(fontSize: 24)),
+            Text('Name: $_name',
+                style: TextStyle(fontSize: 24, fontFamily: 'Arial')),
             SizedBox(height: 10),
-            Text('Age: $_age', style: TextStyle(fontSize: 18)),
+            Text('Age: $_age',
+                style: TextStyle(fontSize: 18, fontFamily: 'Arial')),
             SizedBox(height: 10),
-            Text('Gender: $_gender', style: TextStyle(fontSize: 18)),
+            Text('Gender: $_gender',
+                style: TextStyle(fontSize: 18, fontFamily: 'Arial')),
             SizedBox(height: 10),
-            Text('Address: $_address', style: TextStyle(fontSize: 18)),
+            Text('Address: $_address',
+                style: TextStyle(fontSize: 18, fontFamily: 'Arial')),
           ],
         ),
       ),
