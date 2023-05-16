@@ -21,6 +21,118 @@ class _profilePage2State extends State<profilePage2> {
   static const TextStyle _doctorProfessionStyle = TextStyle(
     fontSize: 18,
   );
+
+  void _editProfile() async {
+    // Show a dialog or navigate to an edit profile page
+    // where user can update their information
+    // You can implement the logic to update the information in your app
+    // For this example, we'll just update the information in the state directly
+    final updatedProfile = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // Implement your edit profile dialog or page here
+        return AlertDialog(
+          title: Text('Edit Profile'),
+          content: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(labelText: 'Name'),
+                onChanged: (value) {
+                  setState(() {
+                    _name = value;
+                  });
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Age'),
+                onChanged: (value) {
+                  setState(() {
+                    _age = value;
+                  });
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Gender'),
+                onChanged: (value) {
+                  setState(() {
+                    _gender = value;
+                  });
+                },
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Address'),
+                onChanged: (value) {
+                  setState(() {
+                    _address = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                Map<String, dynamic> changes = {};
+                if (_name != "") {
+                  changes['name'] = _name;
+                }
+                if (_age != "") {
+                  changes['age'] = _age;
+                }
+                if (_gender != "") {
+                  changes['gender'] = _gender;
+                }
+                if (_address != "") {
+                  changes['address'] = _address;
+                }
+
+                // Update the profile in the database
+                // Replace this with your actual database update logic
+                var response = await updateProfileInDatabase(changes);
+                if (response.statusCode == 200) {
+                  // Database update successful
+                  var obj = jsonDecode(response.body);
+                  Navigator.of(context).pop({
+                    'name': obj["patient"]['firstName'],
+                    'age': obj["patient"]['dateOfBirth'],
+                    'gender': obj["patient"]['gender'],
+                    'address': obj["patient"]['address'],
+                  });
+                } else {
+                  // Handle database update failure
+                  print('Failed to update profile in the database');
+                }
+              },
+              child: Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+
+    // Handle updated profile data
+    if (updatedProfile != null) {
+      setState(() {
+        _name = updatedProfile['name'];
+        _age = updatedProfile['age'];
+        _gender = updatedProfile['gender'];
+        _address = updatedProfile['address'];
+      });
+    }
+  }
+
+// Example function for updating the profile in the database
+  Future<http.Response> updateProfileInDatabase(Map<String, dynamic> changes) {
+    // Replace this with your actual API endpoint for updating the profile
+    // using a POST or PUT request with the provided changes
+    var url = 'https://example.com/api/update-profile';
+    return http.put(
+      Uri.parse(url),
+      body: jsonEncode(changes),
+      headers: {'Content-Type': 'application/json'},
+    );
+  }
+
   Map<String, dynamic>? obj;
   @override
   void initState() {
