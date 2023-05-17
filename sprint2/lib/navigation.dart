@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:sprint2/home.dart';
 import 'package:sprint2/profile.dart';
 import 'demand.dart';
 import 'functions.dart' as func;
@@ -15,11 +16,7 @@ Map<String, dynamic>? obj;
 class _firstPageState extends State<firstPage> {
   int _currentIndex = 0;
   dynamic obj1 = {};
-  List<Widget> pages = [
-    MyWidget(),
-    Tasks(),
-    ProfilePage(),
-  ];
+  List<Widget> pages = [MyWidget(), Tasks(), ProfilePage(), homePage()];
 
   @override
   void initState() {

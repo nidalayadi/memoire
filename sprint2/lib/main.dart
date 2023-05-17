@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sprint2/home.dart';
 import 'package:sprint2/newprofile.dart';
 import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
@@ -14,7 +15,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'newprofile',
+        initialRoute: 'home',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
@@ -24,6 +25,7 @@ void main() async {
           'navigation': (context) => firstPage(),
           'profile': (context) => ProfilePage(),
           'newprofile': (context) => profilePage2(),
+          "home": (context) => const homePage(),
         }),
   );
 }

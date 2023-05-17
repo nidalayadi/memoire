@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_final_fields, prefer_const_constructors, unnecessary_new
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class DoctorVisit {
   String doctorName;
@@ -28,13 +31,13 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
   DateTime _selectedDay = DateTime.now();
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  CalendarFormat _calendarFormat = CalendarFormat.week;
   List<DoctorVisit> _doctorVisits = [
     DoctorVisit(
       doctorName: 'John Doe',
       doctorSpecialty: 'Cardiologist',
       patientName: 'Alice Smith',
-      time: DateTime(2023, 3, 21, 10, 0),
+      time: DateTime(2023, 5, 16, 10, 0),
       status: 'Pending',
       location: '123 Main St',
     ),
@@ -42,7 +45,7 @@ class _TasksState extends State<Tasks> {
       doctorName: 'Jane Smith',
       doctorSpecialty: 'Dermatologist',
       patientName: 'Bob Johnson',
-      time: DateTime(2023, 3, 22, 13, 30),
+      time: DateTime(2023, 5, 16, 10, 0),
       status: 'Done',
       location: '456 Elm St',
     ),
@@ -50,7 +53,7 @@ class _TasksState extends State<Tasks> {
       doctorName: 'Bob Johnson',
       doctorSpecialty: 'Pediatrician',
       patientName: 'Charlie Brown',
-      time: DateTime(2023, 3, 24, 9, 0),
+      time: DateTime(2023, 5, 16, 10, 0),
       status: 'Abort',
       location: '789 Oak St',
     ),
@@ -73,7 +76,7 @@ class _TasksState extends State<Tasks> {
           children: [
             SizedBox(height: 20),
             TableCalendar(
-              headerStyle: HeaderStyle(
+              headerStyle: const HeaderStyle(
                 titleCentered: true,
                 formatButtonVisible: true,
               ),
@@ -97,18 +100,52 @@ class _TasksState extends State<Tasks> {
                   if (!isSameDay(visit.time, _selectedDay)) {
                     return SizedBox.shrink();
                   }
+                  Icon myicon;
+                  switch (visit.status) {
+                    case "Done":
+                      myicon = Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.green[400],
+                        size: 45,
+                      );
+                      break;
+                    case "Abort":
+                      myicon = Icon(
+                        Icons.cancel_outlined,
+                        color: Color.fromARGB(255, 226, 19, 19),
+                        size: 45,
+                      );
+                      break;
+                    case "Reschedule":
+                      myicon = Icon(
+                        Icons.published_with_changes_rounded,
+                        color: Colors.green[400],
+                        size: 45,
+                      );
+                      break;
+                    default:
+                      myicon = Icon(
+                        Icons.pending,
+                        color: Color.fromARGB(255, 120, 120, 120),
+                        size: 45,
+                      );
+                  }
+                  final f = new DateFormat('hh:mm');
                   return Card(
                     child: ListTile(
-                      title: Text(visit.doctorName),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      leading: myicon,
+                      title: Row(
                         children: [
-                          Text('Patient: ${visit.patientName}'),
-                          Text('Specialty: ${visit.doctorSpecialty}'),
+                          Icon(Icons.calendar_today, size: 14),
                           Text(
-                            '${visit.time.hour}:${visit.time.minute} - ${visit.status} - ${visit.location}',
-                          ),
+                              "${f.format(visit.time)} - ${f.format(DateTime(visit.time.hour + 2))}"),
                         ],
+                      ),
+                      subtitle: Text('Specialty: ${visit.doctorSpecialty}'),
+                      isThreeLine: true,
+                      trailing: Icon(
+                        Icons.keyboard_arrow_right,
+                        size: 38,
                       ),
                     ),
                   );
