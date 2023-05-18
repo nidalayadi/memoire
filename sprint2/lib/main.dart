@@ -4,6 +4,7 @@ import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
 import 'demand.dart';
 import 'login.dart';
+import 'medicalrecords.dart';
 import 'navigation.dart';
 import 'signup.dart';
 import 'profile.dart';
@@ -14,7 +15,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'newprofile',
+        initialRoute: 'demand',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
@@ -24,6 +25,7 @@ void main() async {
           'navigation': (context) => firstPage(),
           'profile': (context) => ProfilePage(),
           'newprofile': (context) => profilePage2(),
+          'medicalrecords': (context) => PdfFilesScreen(),
         }),
   );
 }
