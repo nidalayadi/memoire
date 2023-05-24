@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class DoctorVisit {
   String doctorName;
@@ -206,6 +207,24 @@ class _TasksState extends State<Tasks> {
             ),
           ],
         ),
+        floatingActionButton: SpeedDial(
+
+//provide here features of your parent FAB
+            icon: Icons.add,
+            backgroundColor: Color.fromRGBO(27, 107, 164, 1),
+            childMargin: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+            children: [
+              SpeedDialChild(
+                child: Icon(Icons.local_hospital),
+                label: 'Doctor',
+                onTap: null,
+              ),
+              SpeedDialChild(
+                child: Icon(Icons.medical_services),
+                label: 'nurse',
+                onTap: null,
+              ),
+            ]),
       ),
     );
   }

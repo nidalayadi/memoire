@@ -3,6 +3,7 @@ import 'package:sprint2/newprofile.dart';
 import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
 import 'demand.dart';
+import 'home.dart';
 import 'login.dart';
 import 'medicalrecords.dart';
 import 'navigation.dart';
@@ -15,7 +16,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'demand',
+        initialRoute: 'request',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),

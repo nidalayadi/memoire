@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  dropdownfield:
+    dependency: "direct main"
+    description:
+      name: dropdownfield
+      sha256: "4eadceb464737ba9a3a18573c0fcdb13191ba701f30a94db28949e4722207f55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -182,6 +190,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      sha256: "84d0a3e86640efb9feb9fd0f8e236fffd3fb6c83e40ad6fb617654faabc86936"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
