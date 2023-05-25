@@ -22,8 +22,8 @@ class _homePageState extends State<homePage> {
           borderRadius: BorderRadius.circular(30),
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 18, 4, 179),
-              Color.fromARGB(255, 40, 152, 244)
+              Color.fromARGB(255, 96, 209, 247),
+              Color.fromARGB(255, 173, 224, 244)
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -268,7 +268,6 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
           child: Column(
         children: [
@@ -341,7 +340,7 @@ class _homePageState extends State<homePage> {
                 ),
                 // the list of icons
                 Container(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -352,7 +351,7 @@ class _homePageState extends State<homePage> {
                           color: Colors.pink[200],
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        padding: EdgeInsets.all(12),
+                        padding: EdgeInsets.all(14),
                         child: Icon(
                           Icons.assignment,
                           size: 32,
@@ -408,87 +407,88 @@ class _homePageState extends State<homePage> {
                   height: 20,
                 ),
                 // the poster undderneith
-                Stack(children: [
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    height: 160,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 205, 249, 255),
-                          Color.fromARGB(255, 151, 222, 232)
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                Container(
+                  padding: EdgeInsets.all(16),
+                  height: 160,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/doct.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'Get the Best',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(199, 0, 0, 0),
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'Medical Service',
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(199, 0, 0, 0),
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'at the comfort of your Home',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color.fromARGB(189, 107, 106, 106),
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            Container(
+                              padding: EdgeInsets.fromLTRB(12, 6, 0, 6),
+                              decoration: BoxDecoration(
+                                  // color: Color.fromARGB(28, 74, 0, 0),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Set Appointment Now!',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 9, 2, 71),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color.fromARGB(255, 9, 2, 71),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
-                                'Get the Best',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(199, 0, 0, 0),
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Medical Service',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(199, 0, 0, 0),
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'at the comfort of your own',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(189, 107, 106, 106),
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text(
-                                'home.',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color.fromARGB(189, 107, 106, 106),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: Image.asset(
-                      'assets/fem2.png',
-                      width: 180,
-                      height: 160,
-                    ),
-                  ),
-                ]),
+                ),
                 SizedBox(
-                  height: 50,
+                  height: 30,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -500,15 +500,49 @@ class _homePageState extends State<homePage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
               ],
             ),
           ),
           HorizontalCardList(cards: cards),
         ],
       )),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Color.fromRGBO(27, 107, 164, 1),
+        items: [
+          BottomNavigationBarItem(
+            backgroundColor: Color.fromARGB(255, 238, 238, 238),
+            icon: Icon(
+              Icons.home,
+              color: Colors.grey,
+              size: 34,
+            ),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.request_page,
+                color: Colors.grey,
+                size: 34,
+              ),
+              label: "Request"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.file_present_rounded,
+                color: Colors.grey,
+                size: 34,
+              ),
+              label: "Record"),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_sharp,
+                color: Colors.grey,
+                size: 34,
+              ),
+              label: "Profile")
+        ],
+      ),
     );
   }
 }

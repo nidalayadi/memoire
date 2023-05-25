@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:sprint2/home.dart';
 import 'package:sprint2/newprofile.dart';
@@ -25,7 +27,7 @@ void main() async {
           'navigation': (context) => firstPage(),
           'profile': (context) => ProfilePage(),
           'newprofile': (context) => profilePage2(),
-          "home": (context) => const homePage(),
+          "home": (context) => homePage(),
         }),
   );
 }
