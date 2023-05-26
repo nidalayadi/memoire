@@ -19,7 +19,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'doctorHome',
+        initialRoute: 'login',
         routes: {
           'login': (context) => const MyLogin(),
           'report': (context) => PatientReportForm(),

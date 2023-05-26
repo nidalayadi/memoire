@@ -17,7 +17,7 @@ Future<String?> getToken() async {
   return await storage.read(key: 'token');
 }
 
-Future<String> makeGetRequest() async {
+Future<String> getProfileRequest() async {
   final token = await storage.read(key: 'token');
   print(token);
   var url = '${dotenv.env["ROOT_ENDPOINT"]}/patient/get/me';
