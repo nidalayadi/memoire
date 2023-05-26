@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3+4"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: ff625774173754681d66daaf4a448684fb04b78f902da9cb3d308c19cc5e8bab
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
   date_picker_timeline:
     dependency: "direct main"
     description:
@@ -57,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "347d56c26d63519552ef9a569f2a593dda99a81fdbdff13c584b7197cfe05059"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.2"
   dropdownfield:
     dependency: "direct main"
     description:
@@ -134,6 +150,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_osm_interface:
+    dependency: transitive
+    description:
+      name: flutter_osm_interface
+      sha256: "26651f563cf662624a918954002f1716882e0a771bc7f7f5d34f99dde47c56cd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
+  flutter_osm_plugin:
+    dependency: "direct main"
+    description:
+      name: flutter_osm_plugin
+      sha256: fe67ccf103118ea2248f83f54aebcc63ceaea0be228f8278c7aad72cf57e5b59
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.50.0"
+  flutter_osm_web:
+    dependency: transitive
+    description:
+      name: flutter_osm_web
+      sha256: "19fcf82a64376f761f2ba13267d0ea328bc26ff07098c1e52b31ec2cfc68301a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   flutter_pdfview:
     dependency: "direct main"
     description:
@@ -216,6 +256,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_polyline_algorithm:
+    dependency: transitive
+    description:
+      name: google_polyline_algorithm
+      sha256: "357874f00d3f93c3ba1bf4b4d9a154aa9ee87147c068238c1e8392012b686a03"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
   http:
     dependency: "direct main"
     description:
@@ -384,6 +432,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.6"
+  permission_handler:
+    dependency: transitive
+    description:
+      name: permission_handler
+      sha256: "33c6a1253d1f95fd06fa74b65b7ba907ae9811f9d5c1d3150e51417d04b8d6a8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
+  permission_handler_android:
+    dependency: transitive
+    description:
+      name: permission_handler_android
+      sha256: d8cc6a62ded6d0f49c6eac337e080b066ee3bce4d405bd9439a61e1f1927bfe8
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.1"
+  permission_handler_apple:
+    dependency: transitive
+    description:
+      name: permission_handler_apple
+      sha256: ee96ac32f5a8e6f80756e25b25b9f8e535816c8e6665a96b6d70681f8c4f7e85
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.0.8"
+  permission_handler_platform_interface:
+    dependency: transitive
+    description:
+      name: permission_handler_platform_interface
+      sha256: "68abbc472002b5e6dfce47fe9898c6b7d8328d58b5d2524f75e277c07a97eb84"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.9.0"
+  permission_handler_windows:
+    dependency: transitive
+    description:
+      name: permission_handler_windows
+      sha256: f67cab14b4328574938ecea2db3475dad7af7ead6afab6338772c5f88963e38b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   platform:
     dependency: transitive
     description:
@@ -408,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  routing_client_dart:
+    dependency: transitive
+    description:
+      name: routing_client_dart
+      sha256: "7e1e54009880d83af2b6868158551a9df550405bd388512e7072a07ef5d414fa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2"
   scroll_to_index:
     dependency: transitive
     description:
@@ -453,6 +549,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      sha256: "14a00e794c7c11aa145a170587321aedce29769c08d7f58b1d141da75e3b1c6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
@@ -549,6 +653,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.7"
   vector_math:
     dependency: transitive
     description:
