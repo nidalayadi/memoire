@@ -52,7 +52,23 @@ class _PatientReportFormState extends State<PatientReportForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Patient Report Form'),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+            size: 32,
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Navigate back when the button is pressed
+          },
+        ),
+        elevation: 0,
+        title: const Text(
+          'Report Form',
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 26),
+        ),
+        backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -14,12 +14,14 @@ import 'signup.dart';
 import 'profile.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import 'teampage.dart';
+
 void main() async {
   await dotenv.load();
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'doctorHome',
+        initialRoute: 'doctorList',
         routes: {
           'login': (context) => const MyLogin(),
           'report': (context) => PatientReportForm(),
@@ -32,6 +34,7 @@ void main() async {
           'newprofile': (context) => profilePage2(),
           'medicalrecords': (context) => PdfFilesScreen(),
           'raportList': (context) => raportList(),
+          'doctorList': (context) => DoctorListApp(),
         }),
   );
 }
