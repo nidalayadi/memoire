@@ -137,16 +137,16 @@ class _profilePage2State extends State<profilePage2> {
   @override
   void initState() {
     super.initState();
-    _getData();
+    // _getData();
   }
 
-  Future<void> _getData() async {
-    final response = await func.makeGetRequest();
-    final responseData = json.decode(response);
-    setState(() {
-      obj = responseData['patient'];
-    });
-  }
+  // Future<void> _getData() async {
+  //   final response = await func.makeGetRequest();
+  //   final responseData = json.decode(response);
+  //   setState(() {
+  //     obj = responseData['patient'];
+  //   });
+  // }
 
   String calcAge(String dateOfBirth) {
     DateTime birthDateUtc = DateTime.parse(dateOfBirth);
@@ -170,103 +170,22 @@ class _profilePage2State extends State<profilePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        image: 'assets/doctor.png',
+        name: _name,
+        radius: 20.0, // Set the desired border radius
+      ),
       body: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Add some spacing at the top of the widget
-            const SizedBox(height: _sizedBoxHeight),
+
             // Create a row to display the doctor's information
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Display the doctor's image
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFF94B4FC),
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    height: 210,
-                    child: Image.asset(
-                      'assets/doctor.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                // Display the doctor's name, profession, team, and gender
-                const SizedBox(width: 16),
-                Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Display the doctor's name
-                      Text(
-                        _name,
-                        style: _doctorNameStyle,
-                        maxLines: 2,
-                        overflow: TextOverflow
-                            .fade, // Add overflow property to fade the text
-                      ),
-                      // Add some spacing between the doctor's name and profession
-                      const SizedBox(height: 8),
-                      // Display the doctor's profession
-                      Text(
-                        'Age: $_age',
-                        style: _doctorProfessionStyle,
-                      ), // Add some spacing between the doctor's name and profession
-                      const SizedBox(height: 8),
-                      // Display the doctor's profession
-                      Text(
-                        'Gender: $_gender',
-                        style: _doctorProfessionStyle,
-                      ),
-                      const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              launchUrl(Uri.parse('tel:+2130794990784'));
-                            },
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    Colors.green[100])),
-                            child: const Icon(
-                              Icons.phone,
-                              color: Colors.green,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                launchUrl(
-                                    Uri.parse('mailto:nidal.ayadi2@gmail.com'));
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Colors.orange[100])),
-                              child: const Icon(
-                                Icons.mail,
-                                color: Colors.orange,
-                              ))
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
 
             const SizedBox(
-              height: 15,
+              height: 25,
             ),
 
             Row(
@@ -278,10 +197,71 @@ class _profilePage2State extends State<profilePage2> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Address",
+                        "Age :",
                         style: TextStyle(
-                          fontSize: 20,
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(Icons.calendar_month),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: Text(
+                              _age,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        color: Color.fromRGBO(27, 107, 164, 1),
+                        thickness: 1,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        "Gender :",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Icon(Icons.person_2),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: Text(
+                              _gender,
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          )
+                        ],
+                      ),
+                      const Divider(
+                        color: Color.fromRGBO(27, 107, 164, 1),
+                        thickness: 1,
+                        height: 30,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text(
+                        "Address :",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 10,
@@ -301,14 +281,18 @@ class _profilePage2State extends State<profilePage2> {
                           )
                         ],
                       ),
+                      const Divider(
+                        color: Color.fromRGBO(27, 107, 164, 1),
+                        thickness: 1,
+                        height: 30,
+                      ),
                       const SizedBox(
-                        height: 15,
+                        height: 10,
                       ),
                       const Text(
-                        "Email",
+                        "Email :",
                         style: TextStyle(
-                          fontSize: 20,
-                        ),
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 10,
@@ -329,67 +313,128 @@ class _profilePage2State extends State<profilePage2> {
                     ],
                   ),
                 ),
+                const Divider(
+                  color: Color.fromRGBO(27, 107, 164, 1),
+                  thickness: 1,
+                  height: 30,
+                ),
                 const SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 200,
-            ),
 
-            ElevatedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.list),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    "Medical records",
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      Color.fromARGB(255, 150, 193, 228)),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 70)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0)))),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.person),
-                  SizedBox(
-                    width: 70,
-                  ),
-                  Text(
-                    "Edit profile",
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.grey[600]),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 70)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0)))),
-            ),
+            // Add a line separator after each information
           ],
         ),
       ),
     );
     ;
   }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final String image;
+  final String name;
+  final double radius;
+
+  CustomAppBar({
+    required this.image,
+    required this.name,
+    this.radius = 12.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      toolbarHeight: 250,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(radius),
+        ),
+      ),
+      elevation: 0.0,
+      backgroundColor: Color.fromRGBO(27, 107, 164, 1),
+      flexibleSpace: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(height: 35),
+            CircleAvatar(
+              radius: 60.0,
+              backgroundColor: Colors.white,
+              backgroundImage: AssetImage(image),
+            ),
+            SizedBox(height: 28),
+            Text(
+              name,
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 18),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.file_download,
+                      size: 28,
+                    ),
+                    color: Color.fromRGBO(27, 107, 164, 1),
+                    onPressed: () {
+                      // Handle call button pressed
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 32,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.description,
+                      size: 28,
+                    ),
+                    color: Color.fromRGBO(27, 107, 164, 1),
+                    onPressed: () {
+                      // Handle message button pressed
+                    },
+                  ),
+                ),
+                SizedBox(
+                  width: 32,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.white),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.edit,
+                      size: 28,
+                    ),
+                    color: Color.fromRGBO(27, 107, 164, 1),
+                    onPressed: () {
+                      // Handle email button pressed
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(250);
 }

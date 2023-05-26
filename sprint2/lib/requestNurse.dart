@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 class HomeCareRequest {
   final String date;
   final String time;
-  final String doctorSpeciality;
+  final String needs;
   final String location;
   final String patientName;
   final String gender;
@@ -12,7 +12,7 @@ class HomeCareRequest {
   HomeCareRequest({
     required this.date,
     required this.time,
-    required this.doctorSpeciality,
+    required this.needs,
     required this.location,
     required this.patientName,
     required this.gender,
@@ -28,8 +28,7 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  final TextEditingController _doctorSpecialityController =
-      TextEditingController();
+  final TextEditingController _needsController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _patientNameController = TextEditingController();
   String? _genderValue;
@@ -58,7 +57,7 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
       HomeCareRequest homeCareRequest = HomeCareRequest(
         date: _dateController.text,
         time: _timeController.text,
-        doctorSpeciality: _doctorSpecialityController.text,
+        needs: _needsController.text,
         location: _locationController.text,
         patientName: _patientNameController.text,
         gender: _genderValue!,
@@ -85,7 +84,7 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
   void dispose() {
     _dateController.dispose();
     _timeController.dispose();
-    _doctorSpecialityController.dispose();
+    _needsController.dispose();
     _locationController.dispose();
     _patientNameController.dispose();
     super.dispose();
@@ -102,14 +101,13 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
           padding: EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
-            autovalidateMode: AutovalidateMode.disabled,
+            autovalidateMode: AutovalidateMode.always, // Enable auto-validation
             child: Column(
               children: [
                 SizedBox(height: 20),
                 Row(
                   children: [
-                    Flexible(
-                      // Wrap with Flexible to fix overflow error
+                    Expanded(
                       child: GestureDetector(
                         onTap: () => _selectDate(context),
                         child: AbsorbPointer(
@@ -133,8 +131,7 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                       ),
                     ),
                     SizedBox(width: 20),
-                    Flexible(
-                      // Wrap with Flexible to fix overflow error
+                    Expanded(
                       child: GestureDetector(
                         onTap: () => _selectTime(context),
                         child: AbsorbPointer(
@@ -160,80 +157,21 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                   ],
                 ),
                 SizedBox(height: 20),
-                DropdownButtonFormField<String>(
-                  isExpanded: true,
-                  value: _doctorSpecialityController.text.isEmpty
-                      ? null
-                      : _doctorSpecialityController.text,
-                  onChanged: (value) {
-                    setState(() {
-                      _doctorSpecialityController.text = value!;
-                    });
-                  },
+                TextFormField(
+                  controller: _needsController,
+                  keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    labelText: 'Doctor Speciality',
+                    labelText: 'Needs',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please select a doctor speciality';
+                      return 'Please enter your needs';
                     }
                     return null;
                   },
-                  items: [
-                    DropdownMenuItem(
-                      value:
-                          "General Practitioners or Family Medicine Physicians",
-                      child: Text(
-                          "General Practitioners or Family Medicine Physicians"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Registered Nurses",
-                      child: Text("Registered Nurses"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Physical Therapists",
-                      child: Text("Physical Therapists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Occupational Therapists",
-                      child: Text("Occupational Therapists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Speech-Language Pathologists",
-                      child: Text("Speech-Language Pathologists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Respiratory Therapists",
-                      child: Text("Respiratory Therapists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Dietitians or Nutritionists",
-                      child: Text("Dietitians or Nutritionists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Geriatricians",
-                      child: Text("Geriatricians"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Palliative Care Physicians",
-                      child: Text("Palliative Care Physicians"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Rehabilitation Medicine Physicians",
-                      child: Text("Rehabilitation Medicine Physicians"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Psychiatrists",
-                      child: Text("Psychiatrists"),
-                    ),
-                    DropdownMenuItem(
-                      value: "Infectious Disease Specialists",
-                      child: Text("Infectious Disease Specialists"),
-                    ),
-                  ],
                 ),
                 SizedBox(height: 20),
                 TextFormField(

@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:sprint2/home.dart';
 import 'package:sprint2/newprofile.dart';
 import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
 import 'demand.dart';
+import 'home.dart';
 import 'login.dart';
+import 'medicalrecords.dart';
 import 'navigation.dart';
 import 'signup.dart';
 import 'profile.dart';
@@ -17,7 +18,7 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'home',
+        initialRoute: 'navigation',
         routes: {
           'login': (context) => const MyLogin(),
           'register': (context) => const MyRegister(),
@@ -27,7 +28,7 @@ void main() async {
           'navigation': (context) => firstPage(),
           'profile': (context) => ProfilePage(),
           'newprofile': (context) => profilePage2(),
-          "home": (context) => homePage(),
+          'medicalrecords': (context) => PdfFilesScreen(),
         }),
   );
 }

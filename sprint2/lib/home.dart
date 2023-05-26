@@ -506,43 +506,6 @@ class _homePageState extends State<homePage> {
           HorizontalCardList(cards: cards),
         ],
       )),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: Color.fromRGBO(27, 107, 164, 1),
-        items: [
-          BottomNavigationBarItem(
-            backgroundColor: Color.fromARGB(255, 238, 238, 238),
-            icon: Icon(
-              Icons.home,
-              color: Colors.grey,
-              size: 34,
-            ),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.request_page,
-                color: Colors.grey,
-                size: 34,
-              ),
-              label: "Request"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.file_present_rounded,
-                color: Colors.grey,
-                size: 34,
-              ),
-              label: "Record"),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_sharp,
-                color: Colors.grey,
-                size: 34,
-              ),
-              label: "Profile")
-        ],
-      ),
     );
   }
 }
