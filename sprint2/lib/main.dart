@@ -1,11 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sprint2/newprofile.dart';
+import 'package:sprint2/raport.dart';
 import 'package:sprint2/request.dart';
 import 'package:sprint2/signup2.dart';
 import 'demand.dart';
+import 'hahaha.dart';
 import 'home.dart';
+import 'homedoctor.dart';
 import 'login.dart';
 import 'medicalrecords.dart';
 import 'navigation.dart';
@@ -18,17 +19,19 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'navigation',
+        initialRoute: 'doctorHome',
         routes: {
           'login': (context) => const MyLogin(),
+          'report': (context) => PatientReportForm(),
           'register': (context) => const MyRegister(),
           'files': (context) => PdfUploaderApp(),
           'demand': (context) => Tasks(),
           'request': (context) => HomeCareRequestForm(),
           'navigation': (context) => firstPage(),
-          'profile': (context) => ProfilePage(),
+          'doctorHome': (context) => doctorhome(),
           'newprofile': (context) => profilePage2(),
           'medicalrecords': (context) => PdfFilesScreen(),
+          'raportList': (context) => raportList(),
         }),
   );
 }

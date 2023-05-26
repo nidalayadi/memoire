@@ -95,7 +95,24 @@ class _TasksState extends State<Tasks> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('List of Doctor Visits'),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 32,
+            ),
+            onPressed: () {
+              Navigator.pop(
+                  context); // Navigate back when the button is pressed
+            },
+          ),
+          elevation: 0,
+          title: const Text(
+            'List of Doctor Visits',
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 26),
+          ),
+          backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,47 +170,100 @@ class _TasksState extends State<Tasks> {
                                 DoctorVisit visit = hourVisits[index];
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0,
-                                      vertical: 8.0), // Add vertical padding
+                                    horizontal: 16.0,
+                                    vertical: 8.0,
+                                  ),
                                   child: Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     decoration: BoxDecoration(
-                                      color: Color.fromRGBO(27, 107, 164,
-                                          1), // Replace with your desired background color
-                                      borderRadius: BorderRadius.circular(
-                                          8.0), // Replace with your desired border radius
+                                      color: Color.fromRGBO(27, 107, 164, 1),
+                                      borderRadius: BorderRadius.circular(8.0),
                                     ),
-                                    child: ListTile(
-                                      title: Text(
-                                        visit.doctorName,
-                                        style: TextStyle(
-                                            color: Colors
-                                                .white), // Set text color to white
-                                      ),
-                                      subtitle: Column(
+                                    child: ExpansionTile(
+                                      title: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
+                                            visit.doctorName,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          Text(
                                             'Patient: ${visit.patientName}',
-                                            style: TextStyle(
-                                                color: Colors
-                                                    .white), // Set text color to white
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           Text(
                                             'Specialty: ${visit.doctorSpecialty}',
-                                            style: TextStyle(
-                                                color: Colors
-                                                    .white), // Set text color to white
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                           Text(
                                             '${visit.time.hour}:${visit.time.minute} - ${visit.status} - ${visit.location}',
-                                            style: TextStyle(
-                                                color: Colors
-                                                    .white), // Set text color to white
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
+                                          // Additional information or actions can be added here
                                         ],
                                       ),
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: <Widget>[
+                                              SizedBox(
+                                                width: 7,
+                                              ),
+                                              Container(
+                                                width: 50,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  color: Color.fromRGBO(
+                                                      98, 160, 205, 1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: Center(
+                                                  child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.person,
+                                                      size: 32,
+                                                      color: Colors.white,
+                                                    ),
+                                                    onPressed: () {},
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              Container(
+                                                width: 50,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  color: Color.fromRGBO(
+                                                      98, 160, 205, 1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: Center(
+                                                  child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.cancel_outlined,
+                                                      size: 32,
+                                                      color: Colors.white,
+                                                    ),
+                                                    onPressed: () {},
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 );
