@@ -21,19 +21,19 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'doctorList',
+        initialRoute: 'newprofile',
         routes: {
           'login': (context) => const MyLogin(),
           'report': (context) => PatientReportForm(),
           'register': (context) => const MyRegister(),
           'files': (context) => PdfUploaderApp(),
-          'demand': (context) => Tasks(),
+          'demand': (context) => const Tasks(),
           'request': (context) => HomeCareRequestForm(),
           'navigation': (context) => firstPage(),
-          'doctorHome': (context) => doctorhome(),
-          'newprofile': (context) => profilePage2(),
+          'doctorHome': (context) => const doctorhome(),
+          'newprofile': (context) => const profilePage2(),
           'medicalrecords': (context) => PdfFilesScreen(),
-          'raportList': (context) => raportList(),
+          'raportList': (context) => const raportList(),
           'doctorList': (context) => DoctorListApp(),
         }),
   );
