@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, prefer_interpolation_to_compose_strings, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
@@ -16,6 +18,7 @@ class _MyLoginState extends State<MyLogin> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passowrdController = TextEditingController();
   final _focusNode = FocusNode();
+  String role = "";
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -90,9 +93,13 @@ class _MyLoginState extends State<MyLogin> {
                         onPressed: () async {
                           var result = await login(
                               _emailController.text, _passowrdController.text);
-                          if (result) {
-                            // ignore: use_build_context_synchronously
-                            Navigator.pushNamed(context, 'navigation');
+                          if (result[0]) {
+                            print("role : " + role);
+                            if (result[1] == "Patient") {
+                              Navigator.pushNamed(context, 'navigation');
+                            } else if (result[1] == "Caregiver") {
+                              Navigator.pushNamed(context, 'doctorHome');
+                            }
                           } else {
                             _emailController.text = "who the hell are you ";
                           }
@@ -150,7 +157,7 @@ class _MyLoginState extends State<MyLogin> {
   }
 }
 
-Future<bool> login(String email, String password) async {
+Future<dynamic> login(String email, String password) async {
   print("we are inside");
   final url = Uri.parse(
       '${dotenv.env['ROOT_ENDPOINT']}/user/login'); // replace with your login URL
@@ -165,9 +172,11 @@ Future<bool> login(String email, String password) async {
     }),
   );
   print("this is the response : " + response.body);
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
+    print(response.body);
+    String role = jsonDecode(response.body)['role'];
     await saveToken(jsonDecode(response.body)['token']);
-    return true;
+    return [true, role];
   } else if (response.statusCode == 400) {
     print(response.body);
     return false;

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -184,54 +186,52 @@ class _HomeCareRequestFormState extends State<HomeCareRequestForm> {
                   },
                   items: [
                     DropdownMenuItem(
-                      value:
-                          "General Practitioners or Family Medicine Physicians",
-                      child: Text(
-                          "General Practitioners or Family Medicine Physicians"),
+                      value: 'Primary Care',
+                      child: Text('Primary Care'),
                     ),
                     DropdownMenuItem(
-                      value: "Registered Nurses",
-                      child: Text("Registered Nurses"),
+                      value: 'Nursing Care',
+                      child: Text('Nursing Care'),
                     ),
                     DropdownMenuItem(
-                      value: "Physical Therapists",
-                      child: Text("Physical Therapists"),
+                      value: 'Physical Therapy',
+                      child: Text('Physical Therapy'),
                     ),
                     DropdownMenuItem(
-                      value: "Occupational Therapists",
-                      child: Text("Occupational Therapists"),
+                      value: 'Occupational Therapy',
+                      child: Text('Occupational Therapy'),
                     ),
                     DropdownMenuItem(
-                      value: "Speech-Language Pathologists",
-                      child: Text("Speech-Language Pathologists"),
+                      value: 'Speech Therapy',
+                      child: Text('Speech Therapy'),
                     ),
                     DropdownMenuItem(
-                      value: "Respiratory Therapists",
-                      child: Text("Respiratory Therapists"),
+                      value: 'Respiratory Therapy',
+                      child: Text('Respiratory Therapy'),
                     ),
                     DropdownMenuItem(
-                      value: "Dietitians or Nutritionists",
-                      child: Text("Dietitians or Nutritionists"),
+                      value: 'Nutritional Counseling',
+                      child: Text('Nutritional Counseling'),
                     ),
                     DropdownMenuItem(
-                      value: "Geriatricians",
-                      child: Text("Geriatricians"),
+                      value: 'Elderly Care',
+                      child: Text('Elderly Care'),
                     ),
                     DropdownMenuItem(
-                      value: "Palliative Care Physicians",
-                      child: Text("Palliative Care Physicians"),
+                      value: 'Palliative Care',
+                      child: Text('Palliative Care'),
                     ),
                     DropdownMenuItem(
-                      value: "Rehabilitation Medicine Physicians",
-                      child: Text("Rehabilitation Medicine Physicians"),
+                      value: 'Rehabilitation',
+                      child: Text('Rehabilitation'),
                     ),
                     DropdownMenuItem(
-                      value: "Psychiatrists",
-                      child: Text("Psychiatrists"),
+                      value: 'Mental Health',
+                      child: Text('Mental Health'),
                     ),
                     DropdownMenuItem(
-                      value: "Infectious Disease Specialists",
-                      child: Text("Infectious Disease Specialists"),
+                      value: 'Infectious Diseases',
+                      child: Text('Infectious Diseases'),
                     ),
                   ],
                 ),

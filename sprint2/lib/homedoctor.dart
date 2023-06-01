@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'functions.dart';
 
 class doctorhome extends StatefulWidget {
   const doctorhome({Key? key}) : super(key: key);
@@ -8,7 +12,7 @@ class doctorhome extends StatefulWidget {
 }
 
 class _doctorhomeState extends State<doctorhome> {
-  var name = "Anis Boudaren";
+  var name = "";
 
   List<DoctorVisit> _doctorVisits = [];
 
@@ -18,37 +22,62 @@ class _doctorhomeState extends State<doctorhome> {
     _loadDoctorVisits();
   }
 
-  void _loadDoctorVisits() {
+  Future<void> _loadDoctorVisits() async {
     DateTime currentDate = DateTime.now();
-    _doctorVisits = [
-      DoctorVisit(
-        doctorName: 'John Doe',
-        doctorSpecialty: 'Cardiologist',
-        patientName: 'Alice Smith',
+    String docName = await getProfileCaregiver();
+    name = " ${json.decode(docName)['caregiver']["firstName"]}";
+    List<DoctorVisit> _doctorVisitsGet = [];
+    String visits = await getCaregiverApoints();
+    dynamic visitsList = json.decode(visits)['visit'];
+    print("in demand " + visits);
+    for (var i = 0; i < visitsList.length; i++) {
+      _doctorVisitsGet.add(DoctorVisit(
+        doctorName:
+            "Dr. ${visitsList[i]['caregiverId']['lastName']} ${visitsList[i]['caregiverId']['firstName']}",
+        doctorSpecialty: visitsList[i]['caregiverId']['Specialties'],
+        patientName: "${visitsList[i]['patientId']['lastName']}",
         time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 10, 00),
-        status: 'Pending',
-        location: 'Hospital A',
-      ),
-      DoctorVisit(
-        doctorName: 'Jane Smith',
-        doctorSpecialty: 'Dermatologist',
-        patientName: 'Bob Johnson',
-        time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 13, 30),
-        status: 'Confirmed',
-        location: 'Clinic B',
-      ),
-      DoctorVisit(
-        doctorName: 'Bob Johnson',
-        doctorSpecialty: 'Pediatrician',
-        patientName: 'Charlie Brown',
-        time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 9, 00),
-        status: 'Completed',
-        location: 'Hospital A',
-      ),
-    ];
+            DateTime.parse(visitsList[i]['date']).year,
+            DateTime.parse(visitsList[i]['date']).month,
+            DateTime.parse(visitsList[i]['date']).day,
+            DateTime.parse(visitsList[i]['date']).hour,
+            DateTime.parse(visitsList[i]['date']).minute),
+        status: visitsList[i]['state'],
+        location: visitsList[i]['location'],
+      ));
+    }
+    setState(() {
+      _doctorVisits = _doctorVisitsGet;
+    });
+    // _doctorVisits = [
+    //   DoctorVisit(
+    //     doctorName: 'John Doe',
+    //     doctorSpecialty: 'Cardiologist',
+    //     patientName: 'Alice Smith',
+    //     time: DateTime(
+    //         currentDate.year, currentDate.month, currentDate.day, 10, 00),
+    //     status: 'Pending',
+    //     location: 'Hospital A',
+    //   ),
+    //   DoctorVisit(
+    //     doctorName: 'Jane Smith',
+    //     doctorSpecialty: 'Dermatologist',
+    //     patientName: 'Bob Johnson',
+    //     time: DateTime(
+    //         currentDate.year, currentDate.month, currentDate.day, 13, 30),
+    //     status: 'Confirmed',
+    //     location: 'Clinic B',
+    //   ),
+    //   DoctorVisit(
+    //     doctorName: 'Bob Johnson',
+    //     doctorSpecialty: 'Pediatrician',
+    //     patientName: 'Charlie Brown',
+    //     time: DateTime(
+    //         currentDate.year, currentDate.month, currentDate.day, 9, 00),
+    //     status: 'Completed',
+    //     location: 'Hospital A',
+    //   ),
+    // ];
   }
 
   @override

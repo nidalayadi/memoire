@@ -1,6 +1,11 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sprint2/functions.dart';
 
 class DoctorVisit {
   String doctorName;
@@ -44,37 +49,55 @@ class _TasksState extends State<Tasks> {
     _loadDoctorVisits();
   }
 
-  void _loadDoctorVisits() {
+  void _loadDoctorVisits() async {
     DateTime currentDate = DateTime.now();
-    _doctorVisits = [
-      DoctorVisit(
-        doctorName: 'John Doe',
-        doctorSpecialty: 'Cardiologist',
-        patientName: 'Alice Smith',
+    String visits = await getPatientApoints();
+    dynamic visitsList = json.decode(visits)['visit'];
+    print("in demand " + visits);
+    for (var i = 0; i < visitsList.length; i++) {
+      _doctorVisits.add(DoctorVisit(
+        doctorName:
+            "Dr. ${visitsList[i]['caregiverId']['lastName']} ${visitsList[i]['caregiverId']['firstName']}",
+        doctorSpecialty: visitsList[i]['caregiverId']['Specialties'],
+        patientName: "",
         time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 10, 0),
-        status: 'Pending',
-        location: '123 Main St',
-      ),
-      DoctorVisit(
-        doctorName: 'Jane Smith',
-        doctorSpecialty: 'Dermatologist',
-        patientName: 'Bob Johnson',
-        time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 13, 30),
-        status: 'Done',
-        location: '456 Elm St',
-      ),
-      DoctorVisit(
-        doctorName: 'Bob Johnson',
-        doctorSpecialty: 'Pediatrician',
-        patientName: 'Charlie Brown',
-        time: DateTime(
-            currentDate.year, currentDate.month, currentDate.day, 9, 0),
-        status: 'Abort',
-        location: '789 Oak St',
-      ),
-    ];
+            DateTime.parse(visitsList[i]['date']).year,
+            DateTime.parse(visitsList[i]['date']).month,
+            DateTime.parse(visitsList[i]['date']).day,
+            DateTime.parse(visitsList[i]['date']).hour,
+            DateTime.parse(visitsList[i]['date']).minute),
+        status: visitsList[i]['state'],
+        location: visitsList[i]['location'],
+      ));
+    }
+    // _doctorVisits = [
+    //   DoctorVisit(
+    //     doctorName: 'John Doe',
+    //     doctorSpecialty: 'Cardiologist',
+    //     patientName: 'Alice Smith',
+    //     time: DateTime(currentDate.year, currentDate.month, 28, 10, 0),
+    //     status: 'Pending',
+    //     location: '123 Main St',
+    //   ),
+    //   DoctorVisit(
+    //     doctorName: 'Jane Smith',
+    //     doctorSpecialty: 'Dermatologist',
+    //     patientName: 'Bob Johnson',
+    //     time: DateTime(
+    //         currentDate.year, currentDate.month, currentDate.day, 13, 30),
+    //     status: 'Done',
+    //     location: '456 Elm St',
+    //   ),
+    //   DoctorVisit(
+    //     doctorName: 'Bob Johnson',
+    //     doctorSpecialty: 'Pediatrician',
+    //     patientName: 'Charlie Brown',
+    //     time: DateTime(
+    //         currentDate.year, currentDate.month, currentDate.day, 9, 0),
+    //     status: 'Abort',
+    //     location: '789 Oak St',
+    //   ),
+    // ];
   }
 
   List<List<DoctorVisit>> _groupVisitsByHour() {
@@ -96,7 +119,7 @@ class _TasksState extends State<Tasks> {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
               size: 32,
@@ -186,23 +209,32 @@ class _TasksState extends State<Tasks> {
                                         children: [
                                           Text(
                                             visit.doctorName,
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          Text(
-                                            'Patient: ${visit.patientName}',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
                                           ),
                                           Text(
                                             'Specialty: ${visit.doctorSpecialty}',
                                             style:
                                                 TextStyle(color: Colors.white),
                                           ),
+                                          // Text(
+                                          //   'Patient: ${visit.patientName}',
+                                          //   style:
+                                          //       TextStyle(color: Colors.white),
+                                          // ),
+
                                           Text(
-                                            '${visit.time.hour}:${visit.time.minute} - ${visit.status} - ${visit.location}',
+                                            'Address : ${visit.location}',
                                             style:
                                                 TextStyle(color: Colors.white),
+                                          ),
+                                          Text(
+                                            '- ${visit.status}',
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 255, 255, 255)),
                                           ),
                                           // Additional information or actions can be added here
                                         ],

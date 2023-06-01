@@ -1,3 +1,6 @@
+// ignore_for_file: unused_local_variable, prefer_interpolation_to_compose_strings
+
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,10 +20,24 @@ Future<String?> getToken() async {
   return await storage.read(key: 'token');
 }
 
-Future<String> makeGetRequest() async {
+Future<String> getProfileRequest() async {
   final token = await storage.read(key: 'token');
   print(token);
   var url = '${dotenv.env["ROOT_ENDPOINT"]}/patient/get/me';
+  final headers = {'Authorization': 'Bearer $token'};
+  final response = await http.get(Uri.parse(url), headers: headers);
+  print(response.body);
+  if (response.statusCode == 200) {
+    return response.body;
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
+
+Future<String> getProfileCaregiver() async {
+  final token = await storage.read(key: 'token');
+  print(token);
+  var url = '${dotenv.env["ROOT_ENDPOINT"]}/caregiver/get/me';
   final headers = {'Authorization': 'Bearer $token'};
   final response = await http.get(Uri.parse(url), headers: headers);
   print(response.body);
@@ -88,5 +105,31 @@ Future<String> updateProfile(Object params) async {
     return response.body;
   } else {
     throw Exception('Failed to update profile');
+  }
+}
+
+Future<String> getPatientApoints() async {
+  final token = await storage.read(key: 'token');
+  var url = '${dotenv.env["ROOT_ENDPOINT"]}/visit/get/patient';
+  final headers = {'Authorization': 'Bearer $token'};
+  final response = await http.get(Uri.parse(url), headers: headers);
+  print("body : " + response.body);
+  if (response.statusCode == 201) {
+    return response.body;
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
+
+Future<String> getCaregiverApoints() async {
+  final token = await storage.read(key: 'token');
+  var url = '${dotenv.env["ROOT_ENDPOINT"]}/visit/get/Caregiver';
+  final headers = {'Authorization': 'Bearer $token'};
+  final response = await http.get(Uri.parse(url), headers: headers);
+  print("body : " + response.body);
+  if (response.statusCode == 201) {
+    return response.body;
+  } else {
+    throw Exception('Failed to load data');
   }
 }

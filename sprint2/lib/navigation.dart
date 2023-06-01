@@ -26,7 +26,7 @@ class _firstPageState extends State<firstPage> {
   }
 
   Future<void> _getData() async {
-    final response = await func.makeGetRequest();
+    final response = await func.getProfileRequest();
     final responseData = json.decode(response);
     setState(() {
       obj = responseData['patient'];
