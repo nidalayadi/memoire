@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sprint2/newprofile.dart';
+import 'package:sprint2/profile.patient.dart';
 
-import 'package:sprint2/request.dart';
+import 'package:sprint2/appointmentrequestDr.patient.dart';
 import 'package:sprint2/signup2.dart';
 import 'appointment.patient.dart';
-import 'repo';
-import 'hahaha.dart';
-import 'home.dart';
-import 'homedoctor.dart';
+import 'reportForm.doctor.dart';
+import 'report.patient.dart';
+import 'home.patient.dart';
+import 'home.doctor.dart';
 import 'login.dart';
 import 'medicalrecords.dart';
 import 'navigation.dart';
 import 'signup.dart';
-import 'profile.dart';
+import 'profile.patient.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'teampage.doctor.dart';
@@ -22,19 +22,19 @@ void main() async {
   runApp(
     MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'doctorList',
+        initialRoute: 'raportListPatient',
         routes: {
           'login': (context) => const MyLogin(),
           'report': (context) => PatientReportForm(),
           'register': (context) => const MyRegister(),
           'files': (context) => PdfUploaderApp(),
           'demand': (context) => Tasks(),
-          'request': (context) => HomeCareRequestForm(),
+          'request': (context) => HomeCareRequestFormDr(),
           'navigation': (context) => firstPage(),
           'doctorHome': (context) => doctorhome(),
           'newprofile': (context) => profilePage2(),
           'medicalrecords': (context) => PdfFilesScreen(),
-          'raportList': (context) => raportList(),
+          'raportListPatient': (context) => raportListPatient(),
           'doctorList': (context) => DoctorListApp(),
         }),
   );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:intl/intl.dart';
 
 class DoctorReport {
   String doctorName;
@@ -18,14 +19,14 @@ class DoctorReport {
   });
 }
 
-class raportList extends StatefulWidget {
-  const raportList({Key? key}) : super(key: key);
+class raportListPatient extends StatefulWidget {
+  const raportListPatient({Key? key}) : super(key: key);
 
   @override
   _TasksState createState() => _TasksState();
 }
 
-class _TasksState extends State<raportList> {
+class _TasksState extends State<raportListPatient> {
   DateTime _selectedDay = DateTime.now();
 
   List<DoctorReport> _doctorReports = [];
@@ -184,32 +185,78 @@ class _TasksState extends State<raportList> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      child: ListTile(
-                                        title: Text(
-                                          report.doctorName,
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        subtitle: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Patient: ${report.patientName}',
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 80,
+                                            height: 150,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Color.fromARGB(
+                                                  75, 230, 239, 247),
                                             ),
-                                            Text(
-                                              'Specialty: ${report.doctorSpecialty}',
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "${visit.time.day}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  DateFormat.E()
+                                                      .format(visit.time)
+                                                      .substring(0, 3),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              '${report.time.hour}:${report.time.minute}',
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                          ),
+                                          ListTile(
+                                            title: Row(
+                                              children: [
+                                                Text(
+                                                  report.doctorName,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                            subtitle: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Patient: ${report.patientName}',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  'Specialty: ${report.doctorSpecialty}',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  '${report.time.hour}:${report.time.minute}',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -221,29 +268,6 @@ class _TasksState extends State<raportList> {
                       : SizedBox();
                 },
               ),
-            ),
-          ],
-        ),
-        floatingActionButton: SpeedDial(
-          icon: Icons.add,
-          backgroundColor: Color.fromRGBO(27, 107, 164, 1),
-          childMargin: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-          children: [
-            SpeedDialChild(
-              child: Icon(Icons.local_hospital),
-              label: 'Doctor',
-              onTap: () {
-                // Handle doctor button tap
-                print('Doctor button tapped');
-              },
-            ),
-            SpeedDialChild(
-              child: Icon(Icons.medical_services),
-              label: 'Nurse',
-              onTap: () {
-                // Handle nurse button tap
-                print('Nurse button tapped');
-              },
             ),
           ],
         ),

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:sprint2/homedoctor.dart';
-import 'package:sprint2/doctorprofile.dart';
-import 'doctorTrips.dart';
+import 'package:sprint2/home.doctor.dart';
+import 'package:sprint2/profile.doctor.dart';
+import 'Trips.docrtor.dart';
 import 'functions.dart' as func;
 
 class firstPage extends StatefulWidget {
@@ -24,22 +24,22 @@ class _firstPageState extends State<firstPage> {
     )
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    pages[2] = SecondPage(
-      obj: obj,
-    );
-    _getData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   pages[2] = SecondPage(
+  //     obj: obj,
+  //   );
+  //   _getData();
+  // }
 
-  Future<void> _getData() async {
-    final response = await func.makeGetRequest();
-    final responseData = json.decode(response);
-    setState(() {
-      obj = responseData['patient'];
-    });
-  }
+  // Future<void> _getData() async {
+  //   // final response = await func.makeGetRequest();
+  //   final responseData = json.decode(response);
+  //   setState(() {
+  //     obj = responseData['patient'];
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

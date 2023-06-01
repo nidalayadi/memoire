@@ -3,10 +3,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:sprint2/appointmentrequestDr.patient.dart';
 import 'package:sprint2/functions.dart';
+
+import 'appointmentrequestNr.patient.dart';
 
 class DoctorVisit {
   String doctorName;
@@ -62,43 +65,16 @@ class _TasksState extends State<Tasks> {
         doctorSpecialty: visitsList[i]['caregiverId']['Specialties'],
         patientName: "",
         time: DateTime(
-            DateTime.parse(visitsList[i]['date']).year,
-            DateTime.parse(visitsList[i]['date']).month,
-            DateTime.parse(visitsList[i]['date']).day,
-            DateTime.parse(visitsList[i]['date']).hour,
-            DateTime.parse(visitsList[i]['date']).minute),
+          DateTime.parse(visitsList[i]['date']).year,
+          DateTime.parse(visitsList[i]['date']).month,
+          DateTime.parse(visitsList[i]['date']).day,
+          DateTime.parse(visitsList[i]['date']).hour,
+          DateTime.parse(visitsList[i]['date']).minute,
+        ),
         status: visitsList[i]['state'],
         location: visitsList[i]['location'],
       ));
     }
-    // _doctorVisits = [
-    //   DoctorVisit(
-    //     doctorName: 'John Doe',
-    //     doctorSpecialty: 'Cardiologist',
-    //     patientName: 'Alice Smith',
-    //     time: DateTime(currentDate.year, currentDate.month, 28, 10, 0),
-    //     status: 'Pending',
-    //     location: '123 Main St',
-    //   ),
-    //   DoctorVisit(
-    //     doctorName: 'Jane Smith',
-    //     doctorSpecialty: 'Dermatologist',
-    //     patientName: 'Bob Johnson',
-    //     time: DateTime(
-    //         currentDate.year, currentDate.month, currentDate.day, 13, 30),
-    //     status: 'Done',
-    //     location: '456 Elm St',
-    //   ),
-    //   DoctorVisit(
-    //     doctorName: 'Bob Johnson',
-    //     doctorSpecialty: 'Pediatrician',
-    //     patientName: 'Charlie Brown',
-    //     time: DateTime(
-    //         currentDate.year, currentDate.month, currentDate.day, 9, 0),
-    //     status: 'Abort',
-    //     location: '789 Oak St',
-    //   ),
-    // ];
   }
 
   List<List<DoctorVisit>> _groupVisitsByHour() {
@@ -126,8 +102,7 @@ class _TasksState extends State<Tasks> {
               size: 32,
             ),
             onPressed: () {
-              Navigator.pop(
-                  context); // Navigate back when the button is pressed
+              Navigator.pop(context);
             },
           ),
           elevation: 0,
@@ -162,7 +137,7 @@ class _TasksState extends State<Tasks> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: 24, // Use the fixed number of hours in a day
+                itemCount: 24,
                 itemBuilder: (context, hourIndex) {
                   List<DoctorVisit> visits =
                       _groupVisitsByHour().expand((visits) => visits).toList();
@@ -204,42 +179,77 @@ class _TasksState extends State<Tasks> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: ExpansionTile(
-                                      title: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            visit.doctorName,
-                                            style: TextStyle(
+                                      title: Row(children: [
+                                        Container(
+                                          width: 80,
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Color.fromARGB(
+                                                75, 230, 239, 247),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "${visit.time.day}",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                DateFormat.E()
+                                                    .format(visit.time)
+                                                    .substring(0, 3),
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              visit.doctorName,
+                                              style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
-                                                fontSize: 20),
-                                          ),
-                                          Text(
-                                            'Specialty: ${visit.doctorSpecialty}',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          // Text(
-                                          //   'Patient: ${visit.patientName}',
-                                          //   style:
-                                          //       TextStyle(color: Colors.white),
-                                          // ),
-
-                                          Text(
-                                            'Address : ${visit.location}',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                          Text(
-                                            '- ${visit.status}',
-                                            style: TextStyle(
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Specialty: ${visit.doctorSpecialty}',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              'Address : ${visit.location}',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Text(
+                                              '- ${visit.status}',
+                                              style: TextStyle(
                                                 color: Color.fromARGB(
-                                                    255, 255, 255, 255)),
-                                          ),
-                                          // Additional information or actions can be added here
-                                        ],
-                                      ),
+                                                    255, 255, 255, 255),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ]),
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -311,30 +321,36 @@ class _TasksState extends State<Tasks> {
           ],
         ),
         floatingActionButton: SpeedDial(
-
-//provide here features of your parent FAB
-            icon: Icons.add,
-            backgroundColor: Color.fromRGBO(27, 107, 164, 1),
-            childMargin: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-            children: [
-              SpeedDialChild(
-                child: Icon(Icons.local_hospital),
-                label: 'Doctor',
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeCareRequestFormDr(),
-                    ),
-                  );
-                },
-              ),
-              SpeedDialChild(
-                child: Icon(Icons.medical_services),
-                label: 'nurse',
-                onTap: null,
-              ),
-            ]),
+          icon: Icons.add,
+          backgroundColor: Color.fromRGBO(27, 107, 164, 1),
+          childMargin: EdgeInsets.symmetric(vertical: 18, horizontal: 10),
+          children: [
+            SpeedDialChild(
+              child: Icon(Icons.local_hospital),
+              label: 'Doctor',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeCareRequestFormDr(),
+                  ),
+                );
+              },
+            ),
+            SpeedDialChild(
+              child: Icon(Icons.medical_services),
+              label: 'Nurse',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomeCareRequestFormNr(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

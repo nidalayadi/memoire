@@ -1,9 +1,9 @@
 import 'dart:convert';
-
+import 'appointment.patient.dart';
 import 'package:flutter/material.dart';
-import 'package:sprint2/home.dart';
-import 'package:sprint2/profile.dart';
-import 'demand.dart';
+import 'package:sprint2/home.patient.dart';
+import 'package:sprint2/profile.patient.dart';
+
 import 'functions.dart' as func;
 
 class firstPage extends StatefulWidget {
@@ -16,22 +16,22 @@ Map<String, dynamic>? obj;
 class _firstPageState extends State<firstPage> {
   int _currentIndex = 0;
   dynamic obj1 = {};
-  List<Widget> pages = [homePage(), Tasks(), ProfilePage()];
+  List<Widget> pages = [homePage(), Tasks(), profilePage2()];
 
   @override
-  void initState() {
-    super.initState();
-    pages[2] = ProfilePage();
-    _getData();
-  }
+  // void initState() {
+  //   super.initState();
+  //   pages[2] = profilePage2();
+  //   _getData();
+  // }
 
-  Future<void> _getData() async {
-    final response = await func.getProfileRequest();
-    final responseData = json.decode(response);
-    setState(() {
-      obj = responseData['patient'];
-    });
-  }
+  // Future<void> _getData() async {
+  //   final response = await func.makeGetRequest();
+  //   final responseData = json.decode(response);
+  //   setState(() {
+  //     obj = responseData['patient'];
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

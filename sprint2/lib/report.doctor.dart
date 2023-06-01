@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:intl/intl.dart';
+import 'reportForm.doctor.dart';
 
 class DoctorReport {
   String patientName;
@@ -174,16 +176,56 @@ class _TasksState extends State<ReportList> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      child: ListTile(
-                                        title: Text(
-                                          report.patientName,
-                                          style: TextStyle(color: Colors.white),
+                                      child: Row(children: [
+                                        Container(
+                                          width: 80,
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: Color.fromARGB(
+                                                75, 230, 239, 247),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "${report.time.day}",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                DateFormat.E()
+                                                    .format(report.time)
+                                                    .substring(0, 3),
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        subtitle: Text(
-                                          '${report.time.hour.toString().padLeft(2, '0')}:${report.time.minute.toString().padLeft(2, '0')}',
-                                          style: TextStyle(color: Colors.white),
+                                        ListTile(
+                                          title: Text(
+                                            report.patientName,
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          subtitle: Text(
+                                            '${report.time.hour.toString().padLeft(2, '0')}:${report.time.minute.toString().padLeft(2, '0')}',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
                                         ),
-                                      ),
+                                      ]),
                                     ),
                                   ),
                                 );
@@ -196,6 +238,17 @@ class _TasksState extends State<ReportList> {
               ),
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your action here when the FAB is pressed
+            // For example, navigate to another screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PatientReportForm()),
+            );
+          },
+          child: Icon(Icons.add),
         ),
       ),
     );

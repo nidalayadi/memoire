@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:intl/intl.dart';
 
 class DoctorVisit {
   String patientName;
@@ -170,21 +171,62 @@ class _TasksState extends State<Tasks> {
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: ExpansionTile(
-                                      title: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      title: Row(
                                         children: [
-                                          Text(
-                                            visit.patientName,
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                          Container(
+                                            width: 80,
+                                            height: 150,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Color.fromARGB(
+                                                  75, 230, 239, 247),
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "${visit.time.day}",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  DateFormat.E()
+                                                      .format(visit.time)
+                                                      .substring(0, 3),
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            '${visit.time.hour}:${visit.time.minute} - ${visit.status} - ${visit.location}',
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                visit.patientName,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              Text(
+                                                '${visit.time.hour}:${visit.time.minute} - ${visit.status} - ${visit.location}',
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              // Additional information or actions can be added here
+                                            ],
                                           ),
-                                          // Additional information or actions can be added here
                                         ],
                                       ),
                                       children: [
