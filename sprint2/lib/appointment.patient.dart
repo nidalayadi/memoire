@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:sprint2/appointmentrequestDr.patient.dart';
 import 'package:sprint2/functions.dart';
 
 class DoctorVisit {
@@ -319,7 +320,14 @@ class _TasksState extends State<Tasks> {
               SpeedDialChild(
                 child: Icon(Icons.local_hospital),
                 label: 'Doctor',
-                onTap: null,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeCareRequestFormDr(),
+                    ),
+                  );
+                },
               ),
               SpeedDialChild(
                 child: Icon(Icons.medical_services),
